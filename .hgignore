@@ -1,0 +1,16 @@
+syntax: glob
+\.git/*
+\.DS_Store
+\.idea/*
+\.cache/*
+dist/*
+build/*
+node_modules
+out/*
+*.iml
+*.ipr
+*.iws
+*.log*
+syntax: regexp
+yarn.lock$
+package-lock.json$

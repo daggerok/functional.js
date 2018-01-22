@@ -1,0 +1,33 @@
+{
+  "name": "first-blood",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-env": "1.6.1",
+    "babel-preset-stage-0": "6.24.1",
+    "gh-pages": "1.1.0",
+    "ncp": "2.0.0",
+    "npm-run-all": "4.1.2",
+    "parcel-bundler": "1.4.1",
+    "rimraf": "2.6.2",
+    "serve": "6.4.8"
+  },
+  "scripts": {
+    "clean": "rimraf -rf dist",
+    "start": "parcel app/index.html -p 3000",
+    "build": "parcel build app/index.html --no-cache --public-url '/'",
+    "serve": "serve -CSsp 3000 dist",
+    "predeploy": "npm-run-all predeploy:*",
+    "predeploy:build": "yarn build -- --public-url '/functional.js/'",
+    "predeploy:fallback": "ncp ./dist/index.html ./dist/404.html",
+    "predeploy:nojekyll": "touch ./dist/.nojekyll",
+    "deploy": "gh-pages -d ./dist -b gh-pages -m \"Parcel Github Pages $(date +%Y-%m-%d) deployment\""
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-0"
+    ]
+  }
+}

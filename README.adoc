@@ -1,0 +1,3 @@
+= functional.js image:https://travis-ci.org/daggerok/functional.js.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/functional.js"]
+
+This repository contains some functional-like javascript shit-code for internal use. Do not fork it, please... This is just for me... rly

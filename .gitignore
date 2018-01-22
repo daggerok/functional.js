@@ -1,0 +1,30 @@
+.hg/
+.DS_Store
+node_modules/
+dist/
+.cache/
+**/out/*
+
+# Editor directories and files
+.idea/
+*.iml
+*.ipr
+*.iws
+*.log*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.lock
+package-lock.json
+.yarnclean
+yarn.lock
+*=
+
+# Nuxt build
+.nuxt
+
+*-*/firebase.js
+!*-*/firebase.js.default
+*-*/firebase.config.js
+!*-*/firebase.config.js.default
