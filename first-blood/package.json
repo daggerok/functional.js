@@ -11,13 +11,13 @@
     "npm-run-all": "4.1.2",
     "parcel-bundler": "1.4.1",
     "rimraf": "2.6.2",
-    "serve": "6.4.8"
+    "serve": "11.0.0"
   },
   "scripts": {
     "clean": "rimraf -rf dist",
     "start": "parcel app/index.html -p 3000",
     "build": "parcel build app/index.html --no-cache --public-url '/'",
-    "serve": "serve -CSsp 3000 dist",
+    "serve": "serve -S -s -p 3000 dist",
     "predeploy": "npm-run-all predeploy:*",
     "predeploy:build": "npm run build -- --public-url '/functional.js/'",
     "predeploy:fallback": "ncp ./dist/index.html ./dist/404.html",
