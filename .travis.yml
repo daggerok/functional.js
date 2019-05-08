@@ -5,11 +5,13 @@ git:
   depth: 1
 env:
   global:
-    TERM=dumb
+    - TERM=dumb
+    # travis encrypt GITHUB_TOKEN=<your github repo token> --add
+    - secure: WoldedqeTGkuSxO/9KyM5vU7BRAb6ALrq0bjY225aSOtJ32p1VhOrCnqK9eyGF+g/nyOP++zvq6k1dLXwCRddc3TkK9IUb9DN56h3pcDl8EYuihc33h6URXooqNC12VtBEn0qF07UYa3cIWaRM4XRMxWt/CsivNp1DH+crf1UeCAx7+RQeubwXpopeD/qfb3Saa+fEaK4ZLfpMULPctfeoFxckSE03fQgD3H5zZiQ53l7niInjc8Czxaky3EM+E/q6MQiBuKEh3q98tOgEtggKa6eV721bnnIfA3aggc7ha4DUJDToRFcQuyA+6t9jWWZFpQUZn3Q4k0VRmr0coSGXPFxHZCsqKfnO0bW1GOhX0AmxI3K8lXjLq7e6/FhRjWGdJmHBCJsViQ+CYH8aw9GRy2Ydn8+EQ6anigphtx58B15NGFVyyFiQA8Fu+87sBaXBzJeTHZen8Z3mNFJsFgMRSLL15jDrB53IWjvuwr2beFWjZEngIbDaMZTB8yY2xeZ+pnVLDtbMKFIg8M/7xWr0ZoQZFqQft4VPhzr5A/n5ThX4+2YJ1ASbJS1XxnlIqjbswDKKYXwgajAw9lHqtL+FcmWZ8N5fiRTfoH6T95flD0R6+XH7ei2ZF3G6S9co+fuAj8SYLrLK+9Cin79NhG2PoHvZ5jDz2Pkpy3VIFCXMg=
 language: node_js
 node_js:
-  - "stable"
-  - "lts/*"
+  - stable
+  - lts/*
 addons:
   apt:
     packages:
@@ -24,12 +26,10 @@ before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  #
   - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
   - stop_any 8080 5432 3000 80
 script:
   - export root=$(pwd)
-  #
   - cd ${root}/first-blood
   - npm i
   - npm run predeploy
@@ -41,3 +41,15 @@ cache:
   packages: true
   npm: true
   yarn: true
+before_deploy:
+  - cd ${root}/first-blood
+  - npm run predeploy
+deploy:
+  provider: pages
+  skip-cleanup: true
+  # travis encrypt GITHUB_TOKEN=<your github repo token> --add
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+  local-dir: first-blood/dist
