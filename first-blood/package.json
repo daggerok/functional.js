@@ -1,6 +1,6 @@
 {
   "name": "first-blood",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
@@ -19,7 +19,7 @@
     "build": "parcel build app/index.html --no-cache --public-url '/'",
     "serve": "serve -CSsp 3000 dist",
     "predeploy": "npm-run-all predeploy:*",
-    "predeploy:build": "yarn build -- --public-url '/functional.js/'",
+    "predeploy:build": "npm run build -- --public-url '/functional.js/'",
     "predeploy:fallback": "ncp ./dist/index.html ./dist/404.html",
     "predeploy:nojekyll": "touch ./dist/.nojekyll",
     "deploy": "gh-pages -d ./dist -b gh-pages -m \"Parcel Github Pages $(date +%Y-%m-%d) deployment\""
