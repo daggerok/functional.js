@@ -7,19 +7,37 @@ env:
   global:
     TERM=dumb
 language: node_js
-node_js: lts/*
-apt_packages:
-  - curl
+node_js:
+  - "stable"
+  - "lts/*"
+addons:
+  apt:
+    packages:
+      - curl
+      - npm
+      - nodejs
+      - fonts-liberation
+      - libappindicator1
+      - google-chrome-stable
 install: true
+before_install:
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  #
+  - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+  - stop_any 8080 5432 3000 80
 script:
   - export root=$(pwd)
+  #
   - cd ${root}/first-blood
   - npm i
   - npm run predeploy
 cache:
   directories:
+    - "**/node_modules/"
+    - "*/node_modules/"
     - node_modules/
-    - $HOME/.npm
   packages: true
   npm: true
   yarn: true
