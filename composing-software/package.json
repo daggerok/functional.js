@@ -19,6 +19,8 @@
     "@types/karma-jasmine": "0.0.31",
     "@types/node": "12.0.0",
     "assert": "1.5.0",
+    "babel-polyfill": "6.26.0",
+    "jasmine": "3.4.0",
     "karma": "4.1.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "2.0.1",
