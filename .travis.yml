@@ -40,7 +40,9 @@ script:
   - npm run predeploy
 cache:
   directories:
-    - "**/node_modules/"
+    - composing-software/node_modules
+    - karma-parcel-starter/node_modules
+    - first-blood/node_modules
   packages: true
   npm: true
   yarn: true
