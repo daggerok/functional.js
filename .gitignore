@@ -23,3 +23,5 @@ dist/
 !*-*/firebase.js.default
 *-*/firebase.config.js
 !*-*/firebase.config.js.default
+.karma-parcel
+.cache
