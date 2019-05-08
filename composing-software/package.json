@@ -1,0 +1,29 @@
+{
+  "name": "composing-software",
+  "version": "1.0.0",
+  "description": "composing-software",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "rimraf -rf .karma-parcel",
+    "test": "karma start ./karma.conf.js"
+  },
+  "keywords": [
+    "karma",
+    "parcel",
+    "parcel-bandler"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "3.3.12",
+    "@types/karma-jasmine": "0.0.31",
+    "@types/node": "12.0.0",
+    "assert": "1.5.0",
+    "karma": "4.1.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-jasmine": "2.0.1",
+    "karma-parcel": "0.5.2",
+    "parcel-bundler": "1.12.3",
+    "rimraf": "2.6.3"
+  }
+}
