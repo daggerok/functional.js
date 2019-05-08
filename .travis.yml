@@ -27,13 +27,17 @@ before_install:
 script:
   - export root=$(pwd)
   #
-  - cd ${root}/first-blood
+  - cd ${root}/composing-software
   - npm i
-  - npm run predeploy
+  - npm t
   #
   - cd ${root}/karma-parcel-starter
   - npm i
   - npm t
+  #
+  - cd ${root}/first-blood
+  - npm i
+  - npm run predeploy
 cache:
   directories:
     - "**/node_modules/"
