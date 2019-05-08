@@ -10,10 +10,10 @@ addons:
   apt:
     update: false
     packages:
+      #- jq
+      #- npm
+      #- nodejs
       - curl
-      - jq
-      - npm
-      - nodejs
       - fonts-liberation
       - libappindicator1
       - google-chrome-stable
@@ -40,10 +40,11 @@ script:
   - npm run predeploy
 cache:
   directories:
-    - ./*/node_modules/
+    - composing-software/node_modules
+    - karma-parcel-starter/node_modules
+    - first-blood/node_modules
   packages: true
   npm: true
-  yarn: true
 before_deploy:
   - cd ${root}/first-blood
   - npm run predeploy
