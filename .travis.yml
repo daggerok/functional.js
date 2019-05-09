@@ -1,5 +1,5 @@
-#services:
-#  - docker
+services:
+  - docker
 notifications:
   email: false
 git:
@@ -19,7 +19,7 @@ addons:
       - fonts-liberation
       - libappindicator1
       - google-chrome-stable
-      #- docker-ce
+      - docker-ce
 install: true
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
@@ -34,7 +34,17 @@ script:
   - cd ${root}/cypress-testing
   #- export CI=1
   - npm i
+  - npm run cypress-install
   - npm run cypress-run
+  #
+  - docker pull cypress/included:3.2.0
+  - docker run -it -v $(pwd):/e2e -w /e2e -e CI=1 --entrypoint cypress cypress/included:3.2.0 run
+  #
+  - docker pull cypress/browsers:node8.9.3-chrome73
+  - docker run -it -v $(pwd):/e2e -w /e2e -e CI=1 cypress/browsers:node8.9.3-chrome73 bash -c 'npm i ; npm i cypress ; $(npm bin)/cypress run --browser chrome'
+  #
+  - docker pull cypress/browsers:node8.9.3-chrome73
+  - docker run -it -v $(pwd):/e2e -w /e2e -e CI=1 cypress/browsers:node8.9.3-chrome73 bash -c 'npm i ; npm run cypress-install ; npm run cypress-run -- --browser chrome'
   #
   - cd ${root}/composing-software
   - npm i
