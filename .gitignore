@@ -23,5 +23,6 @@ dist/
 !*-*/firebase.js.default
 *-*/firebase.config.js
 !*-*/firebase.config.js.default
-.karma-parcel
-.cache
+.karma-parcel/
+cypress-testing/cypress/videos/
+cypress-testing/cypress/screenshots/

@@ -1,0 +1,22 @@
+{
+  "name": "cypress-testing",
+  "version": "1.0.0",
+  "description": "Using cypress for testing...",
+  "main": "index.js",
+  "scripts": {
+    "cypress-install": "cypress install",
+    "cypress-open": "cypress open",
+    "cypress-run": "cypress run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cypress",
+    "testing",
+    "test-runner"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "3.2.0"
+  }
+}

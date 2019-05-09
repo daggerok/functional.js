@@ -1,3 +1,5 @@
+#services:
+#  - docker
 notifications:
   email: false
 git:
@@ -17,6 +19,7 @@ addons:
       - fonts-liberation
       - libappindicator1
       - google-chrome-stable
+      #- docker-ce
 install: true
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
@@ -24,8 +27,14 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
   - stop_any 8080 5432 3000 80
+  - docker-compose -v
 script:
   - export root=$(pwd)
+  #
+  - cd ${root}/cypress-testing
+  #- export CI=1
+  - npm i
+  - npm run cypress-run
   #
   - cd ${root}/composing-software
   - npm i
