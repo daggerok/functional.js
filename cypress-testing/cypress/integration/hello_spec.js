@@ -16,6 +16,7 @@ describe('hello', () => { // mocha: describe
     // then
     cy.get('div#search div.srg div.g')
       .should('be.visible')
+      //.should(have.length', 9)
       .should($divs => {
         expect($divs, 'at least 9 items').to.have.length.gte(9)
       });
