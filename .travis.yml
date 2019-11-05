@@ -4,36 +4,60 @@ notifications:
   email: false
 git:
   quiet: true
-  depth: 1
+  depth: false
 language: node_js
 node_js: lts/*
-#node_js: stable
+python: 3.7
+matrix:
+  include:
+    - python: 3.7
+services:
+  - xvfb
+  - docker
 addons:
   apt:
     update: false
     packages:
-      #- jq
-      #- npm
-      #- nodejs
+      - jq
+      - bash
       - curl
-      - fonts-liberation
-      - libappindicator1
-      - google-chrome-stable
+      - tree
       - docker-ce
+      - libxml2-utils
+      - libappindicator1
+      - fonts-liberation
+      - google-chrome-stable
+      - python3-setuptools
+      - python3-pip
 install: true
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+  #
+  - |
+    if [ ! -f ${HOME}/.local/daggerok/bash-functions/master/main.bash ] ; then
+      mkdir -p ${HOME}/.local/daggerok/bash-functions/master ;
+      curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash > ${HOME}/.local/daggerok/bash-functions/master/main.bash ;
+    fi
+    source ${HOME}/.local/daggerok/bash-functions/master/main.bash ;
+  - stop_any 80 5432 8080 8081 8082 8083 8084 8085 8086 8087 8088
+  #
+  - export PATH=$HOME/.local/bin:$PATH
+  - pip -V
+  - docker-compose version
+  - pip3 install --user --upgrade pip
+  - pip install --user --upgrade httpie docker-compose
+  - http --version --debug
+  - pip -V
+  #
   - stop_any 8080 5432 3000 80
-  - docker-compose -v
+  - docker-compose version
 script:
   - export root=$(pwd)
   #
   - cd ${root}/cypress-testing
   #- export CI=1
-  - npm i
+  - npm i -f
   - npm run cypress-install
   - npm run cypress-run
   #
@@ -47,21 +71,23 @@ script:
   - docker run -it -v $(pwd):/e2e -w /e2e -e CI=1 cypress/browsers:node8.9.3-chrome73 bash -c 'npm i ; npm run cypress-install ; npm run cypress-run -- --browser chrome'
   #
   - cd ${root}/composing-software
-  - npm i
+  - npm i -f
   - npm t
   #
   - cd ${root}/karma-parcel-starter
-  - npm i
+  - npm i -f
   - npm t
   #
   - cd ${root}/first-blood
-  - npm i
+  - npm i -f
   - npm run predeploy
 cache:
   directories:
     - composing-software/node_modules
     - karma-parcel-starter/node_modules
     - first-blood/node_modules
+    - ~/.local/daggerok
+    - ~/.n*
   packages: true
   npm: true
 before_deploy:
