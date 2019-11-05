@@ -87,6 +87,7 @@ cache:
     - karma-parcel-starter/node_modules
     - first-blood/node_modules
     - ~/.local/daggerok
+    - ~/.docker
     - ~/.n*
   packages: true
   npm: true
