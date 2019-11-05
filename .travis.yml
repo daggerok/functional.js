@@ -57,7 +57,7 @@ script:
   #
   - cd ${root}/cypress-testing
   #- export CI=1
-  - npm i -f
+  - npm i
   - npm run cypress-install
   #
   - sudo apt-get update -yqq >/dev/null
@@ -74,15 +74,15 @@ script:
   - docker run -it -v $(pwd):/e2e -w /e2e -e CI=1 cypress/browsers:node8.9.3-chrome73 bash -c 'npm i ; npm run cypress-install ; npm run cypress-run -- --browser chrome'
   #
   - cd ${root}/composing-software
-  - npm i -f
+  - npm i
   - npm t
   #
   - cd ${root}/karma-parcel-starter
-  - npm i -f
+  - npm i
   - npm t
   #
   - cd ${root}/first-blood
-  - npm i -f
+  - npm i
   - npm run predeploy
 cache:
   directories:
