@@ -1,0 +1,17 @@
+import test from 'ava';
+
+const first = xs => xs[0];
+const rest = xs =>
+  xs.filter((value, index) => index !== 0);
+const sum = xs => {
+  if (xs.length === 0) return 0;
+  return first(xs) + sum(rest(xs));
+}
+
+test('should sum empty array', t => {
+  t.is(sum([]), 0, 'oops, expected: 0');
+});
+
+test('should sum non-empty array', t => {
+  t.is(sum([1, 2, 3]), 6);
+});
