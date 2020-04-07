@@ -1,8 +1,6 @@
 import test from 'ava';
+import { first, rest } from '../dry';
 
-const first = xs => xs[0];
-const rest = xs =>
-  xs.filter((value, index) => index !== 0);
 const reverse = xs => {
   if (xs.length === 0) return []; // base case
   return reverse(rest(xs)/* <- recursion */).concat(first(xs)); // action

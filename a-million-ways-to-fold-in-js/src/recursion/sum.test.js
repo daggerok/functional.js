@@ -1,8 +1,6 @@
 import test from 'ava';
+import { first, rest } from '../dry';
 
-const first = xs => xs[0];
-const rest = xs =>
-  xs.filter((value, index) => index !== 0);
 const sum = xs => {
   if (xs.length === 0) return 0; // base case
   return first(xs) /* action */+ sum(rest(xs)); // <- recursion
