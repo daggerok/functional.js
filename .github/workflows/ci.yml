@@ -1,0 +1,30 @@
+name: CI
+on: [push]
+jobs:
+  a-million-ways-to-fold-in-js:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        nodejs-version: [12]
+    name: A Million Ways to Fold in JS with nodejs ${{ matrix.nodejs-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.nodejs-version }}
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-${{ matrix.os }}-npm-
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.os }}-npm-
+    - uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/node_modules
+        key: ${{ runner.os }}-nodejs-${{ hashFiles('**/package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nodejs-
+          ${{ runner.os }}-
+    - run: cd $GITHUB_WORKSPACE/a-million-ways-to-fold-in-js && npm i -E
+    - run: cd $GITHUB_WORKSPACE/a-million-ways-to-fold-in-js && npm t

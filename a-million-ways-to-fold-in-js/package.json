@@ -1,0 +1,27 @@
+{
+  "name": "a-million-ways-to-fold-in-js",
+  "version": "1.0.0",
+  "description": "Testing ES6 modules with ava in --experimental-modules mode",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "ava src/**/*.test.js"
+  },
+  "keywords": [
+    "ava",
+    "ava-import",
+    "ava-modules",
+    "ava-experimental-modules"
+  ],
+  "author": "daggerok",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "13.11.0",
+    "ava": "3.6.0"
+  },
+  "ava": {
+    "nodeArguments": [
+      "--experimental-modules"
+    ]
+  }
+}
