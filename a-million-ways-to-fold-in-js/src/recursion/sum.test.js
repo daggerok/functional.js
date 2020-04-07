@@ -4,8 +4,8 @@ const first = xs => xs[0];
 const rest = xs =>
   xs.filter((value, index) => index !== 0);
 const sum = xs => {
-  if (xs.length === 0) return 0;
-  return first(xs) + sum(rest(xs));
+  if (xs.length === 0) return 0; // base case
+  return first(xs) /* action */+ sum(rest(xs)); // <- recursion
 }
 
 test('should sum empty array', t => {
