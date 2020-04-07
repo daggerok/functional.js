@@ -3,7 +3,7 @@ import { first, rest } from '../dry';
 
 const sum = xs => {
   if (xs.length === 0) return 0; // base case
-  return first(xs) /* action */+ sum(rest(xs)); // <- recursion
+  return first(xs)/* action */+ sum(rest(xs)); // <- recursion
 }
 
 test('should sum empty array', t => {
